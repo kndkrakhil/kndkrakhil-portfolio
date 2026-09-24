@@ -1,0 +1,28 @@
+kind = "web"
+previewPath = "/"
+title = "Akhil Kandukuri Portfolio"
+description = "A polished personal portfolio for Electronics and Communication Engineer Kandukuri Akhil, showcasing AI, Industrial IoT, cloud, and hardware projects for recruiters and collaborators."
+version = "1.0.0"
+id = "artifacts/akhil-portfolio"
+router = "path"
+
+[[services]]
+name = "web"
+paths = [ "/" ]
+localPort = 25436
+
+[services.development]
+run = "pnpm --filter @workspace/akhil-portfolio run dev"
+
+[services.production]
+build = [ "pnpm", "--filter", "@workspace/akhil-portfolio", "run", "build" ]
+serve = "static"
+publicDir = "artifacts/akhil-portfolio/dist/public"
+
+[[services.production.rewrites]]
+from = "/*"
+to = "/index.html"
+
+[services.env]
+PORT = "25436"
+BASE_PATH = "/"
