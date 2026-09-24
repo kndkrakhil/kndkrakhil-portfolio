@@ -1,0 +1,102 @@
+@import url('https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Instrument+Serif:ital@0;1&family=Space+Mono:wght@400;700&display=swap');
+@import 'tailwindcss';
+@import 'tw-animate-css';
+@plugin "@tailwindcss/typography";
+
+@custom-variant dark (&:is(.dark *));
+
+@theme inline {
+  --color-background: hsl(var(--background));
+  --color-foreground: hsl(var(--foreground));
+  --color-border: hsl(var(--border));
+  --color-input: hsl(var(--input));
+  --color-ring: hsl(var(--ring));
+  --color-card: hsl(var(--card));
+  --color-card-foreground: hsl(var(--card-foreground));
+  --color-card-border: hsl(var(--card-border));
+  --color-primary: hsl(var(--primary));
+  --color-primary-foreground: hsl(var(--primary-foreground));
+  --color-muted: hsl(var(--muted));
+  --color-muted-foreground: hsl(var(--muted-foreground));
+  --font-sans: var(--app-font-sans);
+  --font-serif: var(--app-font-serif);
+  --font-mono: var(--app-font-mono);
+  --radius-md: var(--radius);
+}
+
+:root {
+  --background: 238 38% 7%;
+  --foreground: 234 60% 96%;
+  --border: 238 32% 24%;
+  --input: 238 32% 24%;
+  --ring: 346 100% 71%;
+  --card: 239 34% 14%;
+  --card-foreground: 234 60% 96%;
+  --card-border: 238 32% 24%;
+  --primary: 346 100% 71%;
+  --primary-foreground: 238 38% 7%;
+  --secondary: 188 84% 70%;
+  --secondary-foreground: 238 38% 7%;
+  --muted: 240 28% 17%;
+  --muted-foreground: 234 25% 70%;
+  --app-font-sans: 'DM Sans', sans-serif;
+  --app-font-serif: 'Instrument Serif', serif;
+  --app-font-mono: 'Space Mono', monospace;
+  --radius: 0.6rem;
+  --elevate-1: rgba(255,255,255,.04);
+  --elevate-2: rgba(255,255,255,.08);
+}
+
+* { box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+body {
+  margin: 0;
+  background: hsl(var(--background));
+  color: hsl(var(--foreground));
+  font-family: var(--app-font-sans);
+  text-rendering: optimizeLegibility;
+}
+body::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  z-index: 50;
+  pointer-events: none;
+  opacity: .04;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 180 180' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='.55'/%3E%3C/svg%3E");
+}
+::selection { background: #f5f5f2; color: #0b0b0d; }
+a { color: inherit; text-decoration: none; }
+button, a { -webkit-tap-highlight-color: transparent; }
+
+@keyframes rise { from { opacity: 0; transform: translateY(22px); } to { opacity: 1; transform: translateY(0); } }
+@keyframes scan { from { transform: translateY(-10px); opacity: 0; } to { transform: translateY(10px); opacity: .35; } }
+@keyframes pulse-dot { 0%,100% { opacity: .45; transform: scale(.9); } 50% { opacity: 1; transform: scale(1); } }
+.reveal { opacity: 0; transform: translateY(22px); transition: opacity .7s ease, transform .7s ease; }
+.reveal.is-visible { opacity: 1; transform: translateY(0); }
+.hero-enter { animation: rise .8s ease both; }
+.delay-1 { animation-delay: .1s; }
+.delay-2 { animation-delay: .2s; }
+.delay-3 { animation-delay: .32s; }
+.delay-4 { animation-delay: .44s; }
+.grid-lines {
+  background-image: linear-gradient(rgba(110,231,249,.1) 1px, transparent 1px), linear-gradient(90deg, rgba(110,231,249,.1) 1px, transparent 1px);
+  background-size: 48px 48px;
+}
+.section-shell { width: min(1180px, calc(100% - 40px)); margin-inline: auto; }
+.eyebrow { color: #f5f5f2; font: 700 11px/1 var(--app-font-mono); letter-spacing: .16em; text-transform: uppercase; }
+.hairline { border-color: rgba(245,245,242,.2); }
+.serif { font-family: var(--app-font-serif); }
+.mono { font-family: var(--app-font-mono); }
+.project-card { transition: transform .35s ease, border-color .35s ease, background-color .35s ease; }
+.project-card:hover { transform: translateY(-5px); border-color: rgba(255,107,138,.75); background-color: rgba(28,22,64,.9); }
+.link-arrow { transition: gap .25s ease, color .25s ease; }
+.link-arrow:hover { gap: .7rem; color: #f5f5f2; }
+.nav-link { position: relative; transition: color .2s ease; }
+.nav-link::after { content: ''; position: absolute; bottom: -8px; left: 0; height: 1px; width: 100%; transform: scaleX(0); transform-origin: right; background: #f5f5f2; transition: transform .25s ease; }
+.nav-link:hover { color: #f5f5f2; }
+.nav-link:hover::after { transform: scaleX(1); transform-origin: left; }
+@media (max-width: 767px) {
+  .section-shell { width: min(100% - 32px, 1180px); }
+  .display-title { font-size: clamp(3.5rem, 17vw, 6rem) !important; line-height: .88 !important; }
+}
